@@ -17,7 +17,7 @@
     <div class="" id="home">
         <nav class="navbar navbar-expand-lg">
             <div class="container h-100">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="http://127.0.0.1:8000/finance/">
                     <h1 class="tm-site-title mb-0">Finance Audit</h1>
                 </a>
 
@@ -62,20 +62,23 @@
 
         <br>
 <div class="container">
-
+<form method="POST" action="{% url 'index' %}" class="tm-edit-product-form">
+                    {% csrf_token %}
 <div class="row tm-content-row">
                 <div class="col-sm-1 col-md-1 col-lg-4 col-xl-4 tm-block-col">
                     <select class="custom-select tm-select-accounts" name="category" id="category" required>
-{#                        {% for cat in category %}#}
-                      <option value="cat">Category</option>
-{#                        {% endfor %}#}
+                    <option value="all_category">All category</option>
+                    {% for category in unique_category %}
+                       <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="col-sm-1 col-md-1 col-lg-4 col-xl-4 tm-block-col">
-                    <select class="custom-select tm-select-accounts" name="category" id="category" required>
-{#                        {% for cat in category %}#}
-                      <option value="cat">Period</option>
-{#                        {% endfor %}#}
+                    <select class="custom-select tm-select-accounts" name="period" required>
+                      <option value="today">Today</option>
+                      <option value="7-days">7 Days</option>
+                      <option value="30-days">30 Days</option>
+                      <option value="180-days">180 Days</option>
                     </select>
                 </div>
                 <div class="col-sm-1 col-md-1 col-lg-4 col-xl-4 tm-block-col">
@@ -93,7 +96,7 @@
                   <th scope="col">Costs</th>
                   <th scope="col">Category</th>
                   <th scope="col">Description</th>
-                  <th scope="col">Data</th>
+                  <th scope="col">Date</th>
                 </tr>
              </thead>
             <tbody>
@@ -110,22 +113,34 @@
          </table>
 
       </div>
-<br>
+        <br>
         <div class="row tm-content-row">
 
-                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 tm-block-col">
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 tm-block-col">
+            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 tm-block-col">
+                <p class="form-control validate" >Expenses {{ period }}: {{ sum_costs }} UAH</p>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 tm-block-col">
+                <p class="form-control validate" style="color: orange">Profit {{ period }}: {{ profit }} UAH</p>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 tm-block-col">
                     <input name="send_email" type="email" class="form-control validate" placeholder="Send result for email"/>
                 </div>
-                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 tm-block-col">
+                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 tm-block-col">
                     <input role="button" type="submit" class="btn btn-primary btn-block text-uppercase" value="Send">
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 tm-block-col">
+
+                     <a class="btn btn-primary btn-block text-uppercase" href="{% static file  %}" role="button" download="">Download</a>
+
                 </div>
 
         </div>
 
     </div>
    </div>
+</form>
     </div>
 
   </div>
