@@ -1,0 +1,147 @@
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Finance audit</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.min.css'  %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'  %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo-style.css'  %}">
+
+
+</head>
+
+<body id="reportsPage">
+    <div class="" id="home">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container h-100">
+                <a class="navbar-brand" href="index.html">
+                    <h1 class="tm-site-title mb-0">Finance Audit</h1>
+                </a>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto h-100">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="fas fa fa-cogs"></i>
+                                Statistic
+                            </a>
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-link" href="http://127.0.0.1:8000/finance/add-costs">
+                                <i class="far fa fa-cart-plus"></i>
+                                <span>
+                                    Add costs
+                                </span>
+                            </a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://127.0.0.1:8000/finance/add-profit">
+                                <i class="fas fa fa-university"></i>
+                                Add profit
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://127.0.0.1:8000/finance/about/">
+                                <i class="far fa fa-question"></i>
+                                About
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+
+
+        <br>
+<div class="container">
+
+<div class="row tm-content-row">
+                <div class="col-sm-1 col-md-1 col-lg-4 col-xl-4 tm-block-col">
+                    <select class="custom-select tm-select-accounts" name="category" id="category" required>
+{#                        {% for cat in category %}#}
+                      <option value="cat">Category</option>
+{#                        {% endfor %}#}
+                    </select>
+                </div>
+                <div class="col-sm-1 col-md-1 col-lg-4 col-xl-4 tm-block-col">
+                    <select class="custom-select tm-select-accounts" name="category" id="category" required>
+{#                        {% for cat in category %}#}
+                      <option value="cat">Period</option>
+{#                        {% endfor %}#}
+                    </select>
+                </div>
+                <div class="col-sm-1 col-md-1 col-lg-4 col-xl-4 tm-block-col">
+                    <button type="submit" class="btn btn-primary btn-block text-uppercase">Show</button>
+                </div>
+</div>
+  <div class="row row-cols-2 text-center">
+
+    <div class="col-12">
+      <div class="col force-overflow" style="overflow: scroll;height: 400px">
+          <table class="table table-dark">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Costs</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Data</th>
+                </tr>
+             </thead>
+            <tbody>
+            {% for field in costs %}
+            <tr>
+              <th>{{ forloop.counter }}</th>
+              <td>{{ field.count }} uah</td>
+              <td>{{ field.category.name }}</td>
+              <td>{{ field.description }}</td>
+              <td>{{ field.date_costs }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+         </table>
+
+      </div>
+<br>
+        <div class="row tm-content-row">
+
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 tm-block-col">
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 tm-block-col">
+                    <input name="send_email" type="email" class="form-control validate" placeholder="Send result for email"/>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 tm-block-col">
+                    <input role="button" type="submit" class="btn btn-primary btn-block text-uppercase" value="Send">
+                </div>
+
+        </div>
+
+    </div>
+   </div>
+    </div>
+
+  </div>
+
+</div>
+
+    <script src="{% static 'js/jquery-3.3.1.min.js'  %}"></script>
+    <!-- https://jquery.com/download/ -->
+    <script src="{% static 'js/moment.min.js'  %}"></script>
+    <!-- https://momentjs.com/ -->
+    <script src="{% static 'js/Chart.min.js'  %}"></script>
+    <!-- http://www.chartjs.org/docs/latest/ -->
+    <script src="{% static 'js/bootstrap.min.js'  %}"></script>
+    <!-- https://getbootstrap.com/ -->
+    <script src="{% static 'js/tooplate-scripts.js'  %}"></script>
+
+</body>
+
+</html>
