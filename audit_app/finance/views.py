@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from datetime import timedelta, date
 from .models import Category, Costs, Profits
 from .send_email import send_email
@@ -6,11 +6,9 @@ from .generic_statistic_file import file_create
 
 
 def index(request):
-
     unique_category = Category.objects.all()
 
     if request.method == 'GET':
-
         get_costs = Costs.objects.filter(date_costs=date.today())
         profit_query = Profits.objects.filter(date_profit=date.today())
         profit = sum([p.count for p in profit_query])
@@ -18,9 +16,15 @@ def index(request):
         period = 'today'
         category_id = 'all_category'
         file_send, file_download = file_create(period, category_id, get_costs)
-        return render(request, 'finance/index.html', {'costs': get_costs, 'unique_category': unique_category,
-                                                      'sum_costs': all_costs, 'profit': profit, 'period': period,
-                                                      'file': file_download})
+
+        context = {'costs': get_costs,
+                   'unique_category': unique_category,
+                   'sum_costs': all_costs,
+                   'profit': profit,
+                   'period': period,
+                   'file': file_download}
+
+        return render(request, 'finance/index.html', context)
 
     if request.method == 'POST':
         email_method = request.POST['send_email']
@@ -36,7 +40,7 @@ def index(request):
         profit = sum([p.count for p in profit_query])
 
         if category_id != 'all_category':
-            get_costs = Costs.objects\
+            get_costs = Costs.objects \
                 .filter(category_id=category_id, date_costs__range=[period_dct.get(period), date.today()])
             all_costs = sum([costs.count for costs in get_costs])
             file_send, file_download = file_create(period, category_id, get_costs)
@@ -45,9 +49,16 @@ def index(request):
                 send = send_email(f'{period}:\nCosts: {all_costs}\nProfit: {profit}', email_method)
                 if send:
                     print('send')
-            return render(request, 'finance/index.html', {'costs': get_costs, 'unique_category': unique_category,
-                                                          'sum_costs': all_costs, 'profit': profit, 'period': period,
-                                                          'file': file_download})
+
+            context = {'costs': get_costs,
+                       'unique_category': unique_category,
+                       'sum_costs': all_costs,
+                       'profit': profit,
+                       'period': period,
+                       'file': file_download}
+
+            return render(request, 'finance/index.html', context)
+
         else:
             get_costs = Costs.objects.filter(date_costs__range=[period_dct.get(period), date.today()])
             all_costs = sum([costs.count for costs in get_costs])
@@ -56,19 +67,25 @@ def index(request):
                 send = send_email(f'{period}:\nCosts: {all_costs}\nProfit: {profit}', email_method)
                 if send:
                     print('send')
-            return render(request, 'finance/index.html', {'costs': get_costs, 'unique_category': unique_category,
-                                                          'sum_costs': all_costs, 'profit': profit, 'period': period,
-                                                          'file': file_download})
+
+            context = {'costs': get_costs,
+                       'unique_category': unique_category,
+                       'sum_costs': all_costs,
+                       'profit': profit,
+                       'period': period,
+                       'file': file_download}
+
+            return render(request, 'finance/index.html', context)
 
 
 def add_costs(request):
     get_category = Category.objects.all()
     if request.method == 'POST':
         category_id = request.POST['category']
-        date = request.POST['date']
+        date_costs = request.POST['date']
         description = request.POST.get('description')
         spent = request.POST['spent']
-        cost = Costs.objects.create(count=spent, description=description, date_costs=date, category_id=category_id)
+        Costs.objects.create(count=spent, description=description, date_costs=date_costs, category_id=category_id)
         return render(request, 'finance/add-costs.html', {'category': get_category})
 
     return render(request, 'finance/add-costs.html', {'category': get_category})
@@ -77,8 +94,8 @@ def add_costs(request):
 def add_profit(request):
     if request.method == 'POST':
         money = request.POST['money']
-        date = request.POST['date']
-        profit = Profits.objects.create(count=money, date_profit=date)
+        date_profit = request.POST['date']
+        Profits.objects.create(count=money, date_profit=date_profit)
         return render(request, 'finance/add-profit.html', {})
 
     return render(request, 'finance/add-profit.html', {})
