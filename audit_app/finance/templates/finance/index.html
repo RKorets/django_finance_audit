@@ -17,7 +17,7 @@
     <div class="" id="home">
         <nav class="navbar navbar-expand-lg">
             <div class="container h-100">
-                <a class="navbar-brand" href="http://127.0.0.1:8000/finance/">
+                <a class="navbar-brand" href="{% url 'index' %}">
                     <h1 class="tm-site-title mb-0">Finance Audit</h1>
                 </a>
 
@@ -31,7 +31,7 @@
                         </li>
                         <li class="nav-item">
 
-                            <a class="nav-link" href="http://127.0.0.1:8000/finance/add-costs">
+                            <a class="nav-link" href="{% url 'add_costs' %}">
                                 <i class="far fa fa-cart-plus"></i>
                                 <span>
                                     Add costs
@@ -40,14 +40,14 @@
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="http://127.0.0.1:8000/finance/add-profit">
+                            <a class="nav-link" href="{% url 'add_profit' %}">
                                 <i class="fas fa fa-university"></i>
                                 Add profit
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="http://127.0.0.1:8000/finance/about/">
+                            <a class="nav-link" href="{% url 'about' %}">
                                 <i class="far fa fa-question"></i>
                                 About
                             </a>
@@ -64,7 +64,7 @@
 <div class="container">
 <form method="POST" action="{% url 'index' %}" class="tm-edit-product-form">
                     {% csrf_token %}
-<div class="row tm-content-row">
+        <div class="row tm-content-row">
                 <div class="col-sm-1 col-md-1 col-lg-4 col-xl-4 tm-block-col">
                     <select class="custom-select tm-select-accounts" name="category" id="category" required>
                     <option value="all_category">All category</option>
@@ -84,7 +84,7 @@
                 <div class="col-sm-1 col-md-1 col-lg-4 col-xl-4 tm-block-col">
                     <button type="submit" class="btn btn-primary btn-block text-uppercase">Show</button>
                 </div>
-</div>
+        </div>
   <div class="row row-cols-2 text-center">
 
     <div class="col-12">
@@ -148,13 +148,9 @@
 </div>
 
     <script src="{% static 'js/jquery-3.3.1.min.js'  %}"></script>
-    <!-- https://jquery.com/download/ -->
     <script src="{% static 'js/moment.min.js'  %}"></script>
-    <!-- https://momentjs.com/ -->
     <script src="{% static 'js/Chart.min.js'  %}"></script>
-    <!-- http://www.chartjs.org/docs/latest/ -->
     <script src="{% static 'js/bootstrap.min.js'  %}"></script>
-    <!-- https://getbootstrap.com/ -->
     <script src="{% static 'js/tooplate-scripts.js'  %}"></script>
 
 </body>

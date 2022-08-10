@@ -1,10 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-import csv
-from django.contrib.auth.models import User, Permission
-from django.contrib.auth import authenticate as auth
-from django.contrib.auth import logout as lo
-from datetime import timedelta, date, datetime
+from datetime import timedelta, date
 from .models import Category, Costs, Profits
 from .send_email import send_email
 from .generic_statistic_file import file_create
@@ -45,9 +40,9 @@ def index(request):
                 .filter(category_id=category_id, date_costs__range=[period_dct.get(period), date.today()])
             all_costs = sum([costs.count for costs in get_costs])
             file_send, file_download = file_create(period, category_id, get_costs)
-            if email_method:
 
-                send = send_email(file_send, email_method)
+            if email_method:
+                send = send_email(f'{period}:\nCosts: {all_costs}\nProfit: {profit}', email_method)
                 if send:
                     print('send')
             return render(request, 'finance/index.html', {'costs': get_costs, 'unique_category': unique_category,
@@ -58,7 +53,7 @@ def index(request):
             all_costs = sum([costs.count for costs in get_costs])
             file_send, file_download = file_create(period, category_id, get_costs)
             if email_method:
-                send = send_email(file_send, email_method)
+                send = send_email(f'{period}:\nCosts: {all_costs}\nProfit: {profit}', email_method)
                 if send:
                     print('send')
             return render(request, 'finance/index.html', {'costs': get_costs, 'unique_category': unique_category,
@@ -91,3 +86,7 @@ def add_profit(request):
 
 def about(request):
     return render(request, 'finance/about.html')
+
+
+def page_not_found_view(request, exception):
+    return render(request, 'finance/404.html', status=404)

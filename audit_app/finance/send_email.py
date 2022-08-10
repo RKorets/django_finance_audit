@@ -2,22 +2,21 @@ import smtplib
 from email.mime.text import MIMEText
 
 
-def send_email(filename, to_email):
-    sender = 'you_email'
-    password = 'you_token'
+def send_email(message, to_email):
+    sender = 'YOU_EMAIL'
+    password = 'YOU_APPS_TOKEN'
 
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
 
     try:
-        print(filename)
+        print(message)
         server.login(sender, password)
-        msg = MIMEText('Attached you statistic in file')
+        msg = MIMEText(message)
         msg["Subject"] = 'Send from FINANCE AUDIT statistic'
-        msg.attach(MIMEText(open(filename).read()))
+        # msg.attach(MIMEText(open(filename).read()))
         server.sendmail(sender, to_email, msg.as_string())
-
         return True
+
     except Exception as ex:
-        print(filename)
         return False

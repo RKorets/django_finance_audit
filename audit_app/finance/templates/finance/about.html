@@ -18,7 +18,7 @@
     <div class="" id="home">
         <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
-                <a class="navbar-brand" href="http://127.0.0.1:8000/finance/">
+                <a class="navbar-brand" href="{% url 'index' %}">
                     <h1 class="tm-site-title mb-0">Finance Audit</h1>
                 </a>
 
@@ -26,7 +26,7 @@
                     <ul class="navbar-nav mx-auto h-100">
 
                         <li class="nav-item">
-                            <a class="nav-link" href="http://127.0.0.1:8000/finance/">
+                            <a class="nav-link" href="{% url 'index' %}">
                                 <i class="fas fa fa-cogs"></i>
                                 Statistic
                             </a>
@@ -34,7 +34,7 @@
 
                         <li class="nav-item">
 
-                            <a class="nav-link" href="http://127.0.0.1:8000/finance/add-costs/">
+                            <a class="nav-link" href="{% url 'add_costs' %}">
                                 <i class="far fa fa-cart-plus"></i>
                                 <span>
                                     Add costs
@@ -43,14 +43,14 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="http://127.0.0.1:8000/finance/add-profit">
+                            <a class="nav-link" href="{% url 'add_profit' %}">
                                 <i class="fas fa fa-university"></i>
                                 Add profit
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="http://127.0.0.1:8000/finance/about/">
+                            <a class="nav-link active" href="{% url 'about' %}">
                                 <i class="far fa fa-question"></i>
                                 About
                             </a>

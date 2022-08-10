@@ -9,3 +9,4 @@ urlpatterns = [
 	path('add-costs/', views.add_costs, name='add_costs'),
 	path('add-profit/', views.add_profit, name='add_profit'),
 ]
+

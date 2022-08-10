@@ -5,3 +5,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('finance/', include('finance.urls'))
 ]
+
+handler404 = "finance.views.page_not_found_view"

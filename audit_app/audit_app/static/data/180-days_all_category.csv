@@ -1,4 +1,10 @@
 N,Costs,Category,Description,Date
 1,100,Transport,TEst,2022-08-08
-2,3,Transport,fghfgh,2022-08-01
-3,23,Transport,Gooo,2022-08-08
+2,-111,Food,Newfodd,2022-08-09
+3,3,Transport,fghfgh,2022-08-01
+4,23,Transport,ffsdfdf,2022-08-09
+5,23,Transport,fsdfsdf,2022-08-09
+6,23,Transport,dsvsdfs,2022-08-09
+7,434,Transport,fwewefw,2022-08-10
+8,54,Transport,fvdvdsf,2022-08-10
+9,23,Transport,Gooo,2022-08-08
